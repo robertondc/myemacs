@@ -60,6 +60,8 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+(setq column-number-mode t)
+
 ;;(global-set-key (kbd "<C-up>") 'shrink-window)
 ;;(global-set-key (kbd "<C-down>") 'enlarge-window)
 ;;(global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
