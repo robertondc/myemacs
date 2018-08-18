@@ -63,6 +63,8 @@
 
 (setq column-number-mode t)
 
+(global-display-line-numbers-mode)
+
 ;;(global-set-key (kbd "<C-up>") 'shrink-window)
 ;;(global-set-key (kbd "<C-down>") 'enlarge-window)
 ;;(global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
