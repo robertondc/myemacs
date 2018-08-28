@@ -1,3 +1,4 @@
+
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 
@@ -6,24 +7,28 @@
                     (dos (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
   ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
-  ;;(add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
   (when  (< emacs-major-version 24)
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
-(package-initialize)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (elscreen nyan-mode neotree))))
+ '(package-selected-packages
+   (quote
+    (helm-ag-r helm helm-ag ## tabbar tabbar-ruler nyan-mode neotree multiple-cursors))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(package-initialize)
+
 
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
@@ -35,12 +40,6 @@
 (recentf-mode 1) ; keep a list of recently opened files
 ;; set F7 to list recently opened file
 (global-set-key (kbd "<f7>") 'recentf-open-files)
-
-(require 'elscreen)
-(elscreen-start)
-(global-set-key (kbd "<f9>") 'elscreen-create)
-(global-set-key (kbd "C-}") 'elscreen-next)
-(global-set-key (kbd "C-{") 'elscreen-previous)
 
 (global-set-key "%" 'match-paren)
 
@@ -63,9 +62,16 @@
 
 (setq column-number-mode t)
 
-(global-display-line-numbers-mode)
+(show-paren-mode 1)
 
-;;(global-set-key (kbd "<C-up>") 'shrink-window)
-;;(global-set-key (kbd "<C-down>") 'enlarge-window)
-;;(global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
-;;(global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
+(desktop-save-mode 1)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(setq tabbar-ruler-global-tabbar t)
+(global-set-key (kbd "C-{") 'tabbar-backward-tab)
+(global-set-key (kbd "C-}") 'tabbar-forward-tab)
+
+(require 'tabbar-ruler)
+
+(global-set-key (kbd "C-S-f") 'helm-ag)
